@@ -17,7 +17,7 @@ import {
 } from "@/components";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { quickSearch as quickSearchSchema } from "../schema/quickSearch";
+import { quickSearch as quickSearchSchema } from "@/schema/quickSearch";
 import {
 	LoveIcon,
 	StarIcon,
@@ -49,7 +49,7 @@ export default function Home() {
 
 	const {
 		control,
-		resetField,
+		reset,
 		handleSubmit,
 		formState: { errors },
 	} = useForm({
@@ -70,6 +70,10 @@ export default function Home() {
 			.catch((error) => {
 				console.log(error);
 			});
+	};
+
+	const handleSelectionChange = () => {
+		reset();
 	};
 
 	const hasError =
@@ -95,6 +99,7 @@ export default function Home() {
 							aria-label="Options"
 							color="primary"
 							className="mt-20 md:mt-5"
+							onSelectionChange={handleSelectionChange}
 						>
 							<Tab className="w-full" key="buy" title="Buy">
 								<AppCard
@@ -114,14 +119,12 @@ export default function Home() {
 													<div className="w-full md:w-fit flex flex-col relative">
 														<AppSelect
 															{...field}
+															errorMessage={errors.location?.message as string}
 															isRequired
 															label="Location"
 															selectItems={location}
 															className="md:w-[140px] !h-[48px] inline-block"
 														/>
-														<span className="absolute text-danger-500 -bottom-5 text-[11px]">
-															{errors.location?.message}
-														</span>
 													</div>
 												)}
 											/>
@@ -133,14 +136,12 @@ export default function Home() {
 													<div className="w-full md:w-fit mt-2 md:mt-0 flex flex-col relative">
 														<AppSelect
 															{...field}
+															errorMessage={errors.type?.message as string}
 															isRequired
 															label="Type"
 															selectItems={type}
 															className="md:w-[140px] !h-[48px] inline-block"
 														/>
-														<span className="absolute text-danger-500 -bottom-5 text-[11px]">
-															{errors.type?.message}
-														</span>
 													</div>
 												)}
 											/>
@@ -152,20 +153,19 @@ export default function Home() {
 													<div className="w-full md:w-fit mt-2 md:mt-0 flex flex-col relative">
 														<AppSelect
 															{...field}
+															errorMessage={errors.range?.message as string}
 															isRequired
 															label="Range"
 															selectItems={range}
 															className="md:w-[140px] !h-[40px] inline-block"
 														/>
-														<span className="absolute text-danger-500 -bottom-5 text-[11px]">
-															{errors.range?.message}
-														</span>
 													</div>
 												)}
 											/>
 
 											<AppButton
 												disabled={isLoading}
+												loading={isLoading}
 												type="submit"
 												className={`w-full md:w-[130px] mt-4 md:mt-0 h-[48px] rounded-md text-white text-sm bg-btn_blue`}
 											>
@@ -194,13 +194,11 @@ export default function Home() {
 														<AppSelect
 															{...field}
 															isRequired
+															errorMessage={errors.location?.message as string}
 															label="Location"
 															selectItems={location}
 															className="md:w-[140px] !h-[48px] inline-block"
 														/>
-														<span className="absolute text-danger-500 -bottom-5 text-[11px]">
-															{errors.location?.message}
-														</span>
 													</div>
 												)}
 											/>
@@ -213,13 +211,11 @@ export default function Home() {
 														<AppSelect
 															{...field}
 															isRequired
+															errorMessage={errors.type?.message as string}
 															label="Type"
 															selectItems={type}
 															className="md:w-[140px] !h-[48px] inline-block"
 														/>
-														<span className="absolute text-danger-500 -bottom-5 text-[11px]">
-															{errors.type?.message}
-														</span>
 													</div>
 												)}
 											/>
@@ -231,20 +227,20 @@ export default function Home() {
 													<div className="w-full md:w-fit mt-2 md:mt-0 flex flex-col relative">
 														<AppSelect
 															{...field}
+															errorMessage={errors.range?.message as string}
 															isRequired
 															label="Range"
 															selectItems={range}
 															className="md:w-[140px] !h-[40px] inline-block"
 														/>
-														<span className="absolute text-danger-500 -bottom-5 text-[11px]">
-															{errors.range?.message}
-														</span>
 													</div>
 												)}
 											/>
 
 											<AppButton
 												type="submit"
+												loading={isLoading}
+												disabled={isLoading}
 												className={`w-full md:w-[130px] mt-4 md:mt-0 h-[48px] rounded-md text-white text-sm bg-btn_blue`}
 											>
 												Search
@@ -272,13 +268,11 @@ export default function Home() {
 														<AppSelect
 															{...field}
 															isRequired
+															errorMessage={errors.location?.message as string}
 															label="Location"
 															selectItems={location}
 															className="md:w-[140px] !h-[48px] inline-block"
 														/>
-														<span className="absolute text-danger-500 -bottom-5 text-[11px]">
-															{errors.location?.message}
-														</span>
 													</div>
 												)}
 											/>
@@ -291,13 +285,11 @@ export default function Home() {
 														<AppSelect
 															{...field}
 															isRequired
+															errorMessage={errors.type?.message as string}
 															label="Type"
 															selectItems={type}
 															className="md:w-[140px] !h-[48px] inline-block"
 														/>
-														<span className="absolute text-danger-500 -bottom-5 text-[11px]">
-															{errors.type?.message}
-														</span>
 													</div>
 												)}
 											/>
@@ -309,20 +301,20 @@ export default function Home() {
 													<div className="w-full md:w-fit mt-2 md:mt-0 flex flex-col relative">
 														<AppSelect
 															{...field}
+															errorMessage={errors.range?.message as string}
 															isRequired
 															label="Range"
 															selectItems={range}
 															className="md:w-[140px] !h-[40px] inline-block"
 														/>
-														<span className="absolute text-danger-500 -bottom-5 text-[11px]">
-															{errors.range?.message}
-														</span>
 													</div>
 												)}
 											/>
 
 											<AppButton
 												type="submit"
+												loading={isLoading}
+												disabled={isLoading}
 												className={`w-full md:w-[130px] mt-4 md:mt-0 h-[48px] rounded-md text-white text-sm bg-btn_blue`}
 											>
 												Search

@@ -1,6 +1,7 @@
 import React from "react";
 import { Button as NextButton } from "@nextui-org/react";
 import { classnames } from "../../utils";
+import { AppLoader } from "..";
 
 interface IButton {
 	children: React.ReactNode;
@@ -13,14 +14,21 @@ interface IButton {
 		| "danger";
 	className?: string;
 	disabled?: boolean;
+	loading?: boolean;
 	[key: string]: any;
 }
 
 const Button = (props: IButton) => {
-	const { children = "", className = "", disabled = false, ...rest } = props;
+	const {
+		children = "",
+		className = "",
+		disabled = false,
+		loading = false,
+		...rest
+	} = props;
 	return (
 		<NextButton {...rest} className={classnames(className)} disabled={disabled}>
-			{children}
+			{loading ? <AppLoader /> : children}
 		</NextButton>
 	);
 };

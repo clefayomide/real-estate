@@ -16,14 +16,23 @@ interface ISelect {
 	className?: string;
 	label: string;
 	selectItems: Array<selectItems>;
+	errorMessage: string;
 	[key: string]: any;
 }
 
 export const Select = (props: ISelect) => {
-	const { className = "", size = "sm", selectItems = [], ...rest } = props;
+	const {
+		className = "",
+		size = "sm",
+		selectItems = [],
+		errorMessage = "",
+		...rest
+	} = props;
 	return (
 		<NextSelect
 			{...rest}
+			isInvalid={Boolean(errorMessage)}
+			errorMessage={errorMessage}
 			items={selectItems}
 			size={size}
 			className={classnames("", className)}
