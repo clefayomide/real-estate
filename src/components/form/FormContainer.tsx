@@ -3,7 +3,7 @@ import React from "react";
 
 interface IForm {
 	children: React.ReactNode;
-	onSubmit?: React.FormEventHandler<HTMLFormElement>;
+	onSubmit: React.FormEventHandler<HTMLFormElement>;
 	className?: string;
 	[key: string]: any;
 }

@@ -251,8 +251,49 @@ export const QuoteIcon = (props: ISVG) => {
 	);
 };
 
-// export const ArrowDown = () => {
-// 	return (
+export const EmailIcon = (props: ISVG) => {
+	const {
+		className = "",
+		height = "16",
+		width = "16",
+		fill = "#F5F5F5",
+		...rest
+	} = props;
+	return (
+		<svg
+			{...rest}
+			xmlns="http://www.w3.org/2000/svg"
+			width={`${width}px`}
+			height={`${height}px`}
+			fill={fill}
+			className={classnames("bi bi-envelope-fill", className)}
+			viewBox="0 0 16 16"
+		>
+			<path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
+		</svg>
+	);
+};
 
-// 	)
-// }
+export const PadlockIcon = (props: ISVG) => {
+	const {
+		className = "",
+		height = "16",
+		width = "16",
+		fill = "#F5F5F5",
+		...rest
+	} = props;
+	return (
+		<svg
+			{...rest}
+			xmlns="http://www.w3.org/2000/svg"
+			width={`${width}px`}
+			height={`${height}px`}
+			fill={fill}
+			className={classnames("bi bi-key", className)}
+			viewBox="0 0 16 16"
+		>
+			<path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z" />
+			<path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+		</svg>
+	);
+};

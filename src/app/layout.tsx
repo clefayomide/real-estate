@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Providers } from "./providers";
+import { Providers as NextUIProviders } from "./providers";
 import { AppHeader } from "../components";
 import localFont from "next/font/local";
 import StoreProvider from "./storeProvider";
@@ -33,12 +33,10 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={`${Euclid.className}`}>
 				<StoreProvider>
-					<Providers>
+					<NextUIProviders>
 						<AppHeader />
-						<main className="p-5 md:p-10 mt-[90px]">
-							{children}
-						</main>
-					</Providers>
+						<main className="p-5 md:p-10 mt-[90px]">{children}</main>
+					</NextUIProviders>
 				</StoreProvider>
 			</body>
 		</html>

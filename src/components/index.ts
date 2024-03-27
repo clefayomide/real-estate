@@ -10,5 +10,10 @@ export {
 	StarRating as AppStarRating,
 	SalesRating as AppSalesRating,
 } from "./ratings";
-
 export { default as AppUser } from "./user/User";
+export { default as AppLoader } from "./loader/Loader";
+export { default as AppModal } from "./modal/modal";
+export { default as AppInput } from "./form/Input";
+export { default as AppCheckbox } from "./form/Checkbox";
+export {default as AppLogin} from "./login/Login"
+export {default as AppSignup} from "./signup/SignUp"
