@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	@font-face {
+		font-family: "eucid";
+		font-style: normal;
+		font-weight: 400;
+		font-display: swap;
+		src: url(./assets//font/EuclidCircularRegular.ttf) format("ttf");
+	}
+
+	@font-face {
+		font-family: "eucid2";
+		font-style: "normal";
+		font-weight: 400;
+		font-display: swap;
+		src: url(./assets/font/euclid.ttf) format("ttf");
+	}
+}
+
+*,
+*::before,
+*::after {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--btn_blue: #3161d1;
+}
+
+div[data-slot="input-wrapper"],
+div[data-slot="input-wrapper"]:hover {
+	border: 1px solid #cdcdd2;
+}
+
+div[data-slot="input-wrapper"]:focus-within {
+	border: 1px solid var(--btn_blue) !important;
+}
+
+.notification-container {
+	margin-top: -100px !important;
+}
