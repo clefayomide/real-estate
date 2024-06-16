@@ -16,7 +16,7 @@ type classNamesPropType =
 
 type InputProps = {
 	endContent?: React.ReactNode;
-	label: string;
+	label?: string;
 	placeholder: string;
 	variant?: "bordered" | "flat" | "faded" | "underlined";
 	autoFocus?: boolean;

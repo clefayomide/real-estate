@@ -467,7 +467,7 @@ export default function Home() {
 				</AppHeading>
 				<div className="mt-10 flex flex-col flex-wrap md:flex-row gap-5 lg:gap-4 ">
 					<AppCard className="shadow-none w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-fit lg:h-[298px]">
-						<LoveIcon fill="#3161d1" />
+						<LoveIcon fill="#2f80ed" />
 						<AppHeading type={6} className="text-[20px] leading-[64px]">
 							Comfortable
 						</AppHeading>
@@ -478,7 +478,7 @@ export default function Home() {
 						</AppParagraph>
 					</AppCard>
 					<AppCard className="b shadow-none w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-fit lg:h-[298px]">
-						<SecurityIcon fill="#3161d1" />
+						<SecurityIcon fill="#2f80ed" />
 						<AppHeading type={6} className="text-[20px] leading-[64px]">
 							Extra security
 						</AppHeading>
@@ -489,7 +489,7 @@ export default function Home() {
 						</AppParagraph>
 					</AppCard>
 					<AppCard className="b shadow-none w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-fit lg:h-[298px]">
-						<StarIcon fill="#3161d1" />
+						<StarIcon fill="#2f80ed" />
 						<AppHeading type={6} className="text-[20px] leading-[64px]">
 							Luxury
 						</AppHeading>
@@ -499,7 +499,7 @@ export default function Home() {
 						</AppParagraph>
 					</AppCard>
 					<AppCard className="b shadow-none w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-fit lg:h-[298px]">
-						<BestPriceIcon fill="#3161d1" />
+						<BestPriceIcon fill="#2f80ed" />
 						<AppHeading type={6} className="text-[20px] leading-[64px]">
 							Best Price
 						</AppHeading>
@@ -510,7 +510,7 @@ export default function Home() {
 						</AppParagraph>
 					</AppCard>
 					<AppCard className="b shadow-none w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-fit lg:h-[298px]">
-						<LocationIcon fill="#3161d1" />
+						<LocationIcon fill="#2f80ed" />
 						<AppHeading type={6} className="text-[20px] leading-[64px]">
 							Strategic Location
 						</AppHeading>
@@ -521,7 +521,7 @@ export default function Home() {
 						</AppParagraph>
 					</AppCard>
 					<AppCard className="b shadow-none w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-fit lg:h-[298px]">
-						<PieIcon fill="#3161d1" />
+						<PieIcon fill="#2f80ed" />
 						<AppHeading type={6} className="text-[20px] leading-[64px]">
 							Efficient
 						</AppHeading>
@@ -557,7 +557,7 @@ export default function Home() {
 					</AppParagraph>
 					<AppButton
 						type="submit"
-						className={`h-[58px] w-[186px] mt-8 text-white bg-btn_blue rounded-md text-sm`}
+						className={`h-[58px] w-[186px] mt-8 text-white text-sm`}
 					>
 						Learn More
 					</AppButton>

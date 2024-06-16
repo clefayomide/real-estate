@@ -22,3 +22,12 @@ export const login = yup.object().shape({
 	password: yup.string().required(),
 	checkbox: yup.boolean(),
 });
+
+export const otpVerification = yup.object().shape({
+	otp: yup
+		.number()
+		.typeError("otp must be a number")
+		.required()
+		.min(6)
+		.test("otp", "otp must be a number", (value) => typeof value === "number"),
+});

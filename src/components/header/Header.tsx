@@ -44,7 +44,7 @@ const Header = () => {
 						}
 						alt="Real Estate Logo"
 						classNames={{
-							img: "cursor-pointer w-[200px] h-[100px] object-contain",
+							img: "cursor-pointer w-fit md:w-[200px] h-[58px] md:h-[100px] object-cover",
 						}}
 					/>
 

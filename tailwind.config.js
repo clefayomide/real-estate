@@ -24,12 +24,15 @@ export default {
 				titleIpadAndDesktop: "30px",
 			},
 			colors: {
-				btn_blue: "#3161d1",
+				btn_blue: "#2f80ed",
 				light_purple: "#F0E9FD",
 				paragraph: "#73788C",
 				primary: "#3161d1",
 				default: "none",
 				light_green: "#D2EAF5",
+			},
+			spacing: {
+				customHeight: "calc(100vh - 70px)",
 			},
 		},
 	},

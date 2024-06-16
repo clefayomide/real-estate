@@ -6,9 +6,11 @@ import { EyeIcon, EyeSlashIcon } from "../../assets";
 
 const PasswordInput = ({
 	errorMessage,
+	label = "Password",
 	...rest
 }: {
 	errorMessage: string;
+	label?: string;
 	[key: string]: any;
 }) => {
 	const [type, setType] = useState("password");
@@ -30,12 +32,11 @@ const PasswordInput = ({
 	}, [type, errorMessage]);
 	return (
 		<AppInput
-			{...rest}
 			errorMessage={errorMessage}
 			type={type}
 			isRequired={true}
 			className="mt-4"
-			label="Password"
+			label={label}
 			placeholder="xyz123"
 			endContent={
 				<button
@@ -47,6 +48,7 @@ const PasswordInput = ({
 				</button>
 			}
 			labelPlacement={"outside"}
+			{...rest}
 		/>
 	);
 };
