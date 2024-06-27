@@ -23,7 +23,7 @@ const Verify = ({
 
 				<div>{message}</div>
 			</div>
-			<AppButton className="bg-none !h-fit !w-fit text-white" isIconOnly={true}>
+			<AppButton className="!bg-transparent !h-fit !w-fit text-white" isIconOnly={true}>
 				<CloseIcon className="text-xl font-bold" />
 			</AppButton>
 		</div>

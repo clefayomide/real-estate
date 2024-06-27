@@ -1,4 +1,3 @@
-// Need to use the React-specific entry point to import createApi
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type {
 	BaseQueryFn,
@@ -8,9 +7,11 @@ import type {
 import { RootState } from "../lib/store";
 import { ErrorType } from "../types";
 import { notifyError } from "../utils/notification";
+import { reAuthUser } from "../lib/feature/user";
+import { appConfig } from "../config";
 
 const baseQuery = fetchBaseQuery({
-	baseUrl: "http://localhost:8000/v1/",
+	baseUrl: appConfig.baseUrl,
 	prepareHeaders: (headers, { getState }) => {
 		const {
 			user: {
@@ -19,6 +20,7 @@ const baseQuery = fetchBaseQuery({
 			},
 		} = getState() as RootState;
 		headers.set("Content-type", "application/json; charset=UTF-8");
+		headers.set("Access-Control-Allow-Origin", "*");
 		return headers;
 	},
 	credentials: "include",
@@ -42,10 +44,16 @@ const apiBaseQuery: BaseQueryFn<
 		if (error.error && error.error.length > 0) {
 			notifyError(error.error.join(", "), error?.message);
 		} else {
-			notifyError(error.message);
+			notifyError(error.message, "An error occurred");
 		}
 	}
-
+	if (
+		result.error &&
+		Number(result?.error.status) === 401 &&
+		error.message === "user not authenticated"
+	) {
+		api.dispatch(reAuthUser());
+	}
 	return result;
 };
 export default apiBaseQuery;

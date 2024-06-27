@@ -28,7 +28,11 @@ const Button = (props: IButton) => {
 		...rest
 	} = props;
 	return (
-		<NextButton {...rest} className={classnames(className)} disabled={disabled}>
+		<NextButton
+			{...rest}
+			className={classnames("bg-btn_blue rounded-md h-[48px]", className)}
+			disabled={disabled}
+		>
 			{loading ? <AppLoader /> : children}
 		</NextButton>
 	);

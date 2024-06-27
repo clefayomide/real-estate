@@ -22,3 +22,7 @@ export const login = yup.object().shape({
 	password: yup.string().required(),
 	checkbox: yup.boolean(),
 });
+
+export const otpVerification = yup.object().shape({
+	otp: yup.string().required().min(6),
+});
