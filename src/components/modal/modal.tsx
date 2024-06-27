@@ -7,13 +7,8 @@ import {
 	ModalHeader,
 	ModalBody,
 	ModalFooter,
-	Button,
 	useDisclosure,
-	Checkbox,
-	Input,
-	Link,
 } from "@nextui-org/react";
-import { EmailIcon, PadlockIcon } from "@/assets";
 
 type ModalProps = {
 	header: string;

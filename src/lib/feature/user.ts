@@ -39,11 +39,32 @@ export const userSlice = createSlice({
 				scroll: action.payload,
 			};
 		},
+		updateVerification: (state, action) => {
+			const { verified } = action.payload ?? {};
+			return {
+				...state,
+				data: { ...state.data, verified },
+			};
+		},
+		reAuthUser: () => {
+			return { ...initialState, showLoginForm: true };
+		},
+
+		clearUser: () => {
+			return initialState;
+		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { login, toggleLoginForm, toggleSignupForm, updateScroll } =
-	userSlice.actions;
+export const {
+	login,
+	toggleLoginForm,
+	toggleSignupForm,
+	updateScroll,
+	clearUser,
+	reAuthUser,
+	updateVerification,
+} = userSlice.actions;
 
 export default userSlice.reducer;

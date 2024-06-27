@@ -2,12 +2,35 @@ import { useNavigate } from "react-router-dom";
 import { HumanIcon } from "../../../assets";
 import { AppButton, AppHeading, AppParagraph } from "../../../components";
 import { path } from "../../../routes/path";
+import { useVerificationRequestMutation } from "../../../services/auth";
+import { useAppSelector } from "../../../lib/hooks";
+import { propogateError } from "../../../utils/error/propogation";
+import { ErrorPropogationType, SuccessType } from "../../../types";
+import { notifySuccess } from "../../../utils/notification";
 
 const RequestOtp = () => {
 	const navigate = useNavigate();
+	const user = useAppSelector((state) => state.user);
+	const { user: userObject } = user;
+	const {
+		data: { id, email },
+	} = userObject;
+	const [verificationRequest, { isLoading }] = useVerificationRequestMutation();
 
 	const handleRequestOtp = () => {
-		navigate(path.verifyOtp);
+		verificationRequest({ id, email })
+			.unwrap()
+			.then((response: SuccessType) => {
+				const { message } = response;
+				if (message.toLowerCase() === "account already verified") {
+					notifySuccess(message, "Verified");
+					return navigate(path.home)
+				}
+				navigate(path.verifyOtp);
+			})
+			.catch((error: ErrorPropogationType) => {
+				propogateError(error);
+			});
 	};
 	return (
 		<section className="flex flex-col md:flex-row  gap-[50px] items-center relative translate-y-12 md:translate-y-1/2  ]">
@@ -24,6 +47,8 @@ const RequestOtp = () => {
 					email address. Kindly click on request OTP
 				</AppParagraph>
 				<AppButton
+					disabled={isLoading}
+					loading={isLoading}
 					onClick={handleRequestOtp}
 					className=" w-full md:w-auto text-white mt-10 md:mt-5 rounded font-semibold"
 				>

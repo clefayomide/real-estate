@@ -601,12 +601,12 @@ export const LockIcon = () => {
 					y2="50"
 					gradientUnits="userSpaceOnUse"
 				>
-					<stop stop-color="#BEC0C2" />
-					<stop offset="0.21181" stop-color="#70706F" />
-					<stop offset="0.27064" stop-color="#8F908F" />
-					<stop offset="0.503021" stop-color="#A1A2A3" />
-					<stop offset="0.767833" stop-color="#70706F" />
-					<stop offset="1" stop-color="#BEC0C2" />
+					<stop stopColor="#BEC0C2" />
+					<stop offset="0.21181" stopColor="#70706F" />
+					<stop offset="0.27064" stopColor="#8F908F" />
+					<stop offset="0.503021" stopColor="#A1A2A3" />
+					<stop offset="0.767833" stopColor="#70706F" />
+					<stop offset="1" stopColor="#BEC0C2" />
 				</linearGradient>
 			</defs>
 		</svg>
@@ -638,12 +638,12 @@ export const LockOpenIcon = () => {
 					y2="50"
 					gradientUnits="userSpaceOnUse"
 				>
-					<stop stop-color="#BEC0C2" />
-					<stop offset="0.21181" stop-color="#70706F" />
-					<stop offset="0.27064" stop-color="#8F908F" />
-					<stop offset="0.503021" stop-color="#A1A2A3" />
-					<stop offset="0.767833" stop-color="#70706F" />
-					<stop offset="1" stop-color="#BEC0C2" />
+					<stop stopColor="#BEC0C2" />
+					<stop offset="0.21181" stopColor="#70706F" />
+					<stop offset="0.27064" stopColor="#8F908F" />
+					<stop offset="0.503021" stopColor="#A1A2A3" />
+					<stop offset="0.767833" stopColor="#70706F" />
+					<stop offset="1" stopColor="#BEC0C2" />
 				</linearGradient>
 			</defs>
 		</svg>

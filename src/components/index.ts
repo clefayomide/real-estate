@@ -21,3 +21,4 @@ export { default as AppSignup } from "./signup/SignUp";
 export { default as AppPasswordInput } from "./form/PasswordInput";
 export { default as AppImage } from "./image/Image";
 export { default as AppVerificationBanner } from "./banner/verify";
+export { default as AppOtpTimer } from "./otp-timer/otp-timer";

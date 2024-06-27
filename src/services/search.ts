@@ -1,6 +1,6 @@
 // Need to use the React-specific entry point to import createApi
 import apiBaseQuery from "../baseQuery/apiBaseQuery";
-import { IQUICKSEARCHSELECT } from "../constants/types";
+import { IQUICKSEARCHSELECT } from "../constants";
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 // Define a service using a base URL and expected endpoints

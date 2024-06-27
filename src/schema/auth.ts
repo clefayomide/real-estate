@@ -24,10 +24,5 @@ export const login = yup.object().shape({
 });
 
 export const otpVerification = yup.object().shape({
-	otp: yup
-		.number()
-		.typeError("otp must be a number")
-		.required()
-		.min(6)
-		.test("otp", "otp must be a number", (value) => typeof value === "number"),
+	otp: yup.string().required().min(6),
 });
