@@ -7,6 +7,7 @@ import {
 } from "../../lib/feature/user";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { HamburgerMenu } from "../../assets";
 
 const Header = () => {
 	const user = useAppSelector((state) => state.user);
@@ -74,32 +75,39 @@ const Header = () => {
 							/>
 						</li>
 					</ul>
-					<div className="hidden lg:flex gap-5">
+					<div className="flex gap-5">
 						{user.user?.isAuthenticated ? (
 							<div>
 								<AppUser
 									name="Alex Hunter"
-									description="Product Designer"
+									className="hidden lg:flex"
+									description="Estate Surveyor"
 									avatarProps={{
 										src: "https://res.cloudinary.com/clefayomide/image/upload/v1662292169/cld-sample.jpg",
 									}}
 								/>
+								<AppButton
+									className="block lg:hidden bg-transparent"
+									isIconOnly={true}
+								>
+									<HamburgerMenu className="ro rotate-180 shadow-none" />
+								</AppButton>
 							</div>
 						) : (
-							<>
-								<AppButton
-									onClick={handleOpenLoginForm}
-									className={` rounded-none bg-none text-black bg-inherit text-sm`}
-								>
-									Login
-								</AppButton>
+							<div className="flex">
 								<AppButton
 									onClick={handleOpenSignupForm}
-									className={` rounded-md text-white text-sm bg-btn_blue`}
+									className={`h-[40px] rounded-md text-white text-sm bg-btn_blue`}
 								>
 									Sign up
 								</AppButton>
-							</>
+								<AppButton
+									onClick={handleOpenLoginForm}
+									className={`h-[40px] rounded-none bg-none text-black bg-inherit text-sm`}
+								>
+									Login
+								</AppButton>
+							</div>
 						)}
 					</div>
 				</nav>

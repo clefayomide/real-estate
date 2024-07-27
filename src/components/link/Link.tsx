@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 import { Link as NextUILink } from "@nextui-org/react";
 import { classnames } from "../../utils/classnames";
 
@@ -18,11 +16,6 @@ interface ILink {
 }
 
 export default function Link(prop: ILink) {
-	const [showIcon, setShowIcon] = useState(false);
-
-	const showAnchorIcon = () => {
-		setShowIcon((prev) => !prev);
-	};
 	const { text = "", className = "", ...props } = prop;
 	return (
 		<NextUILink
@@ -30,9 +23,6 @@ export default function Link(prop: ILink) {
 				"outline-none border-none focus:border-none focus:outline-none",
 				className
 			)}
-			showAnchorIcon={showIcon}
-			onMouseEnter={showAnchorIcon}
-			onMouseLeave={showAnchorIcon}
 			{...props}
 		>
 			{text}
