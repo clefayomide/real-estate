@@ -649,3 +649,80 @@ export const LockOpenIcon = () => {
 		</svg>
 	);
 };
+
+export const HamburgerMenu = (prop: ISVG) => {
+	const { className = "" } = prop;
+	return (
+		<svg
+			width="34"
+			height="27"
+			className={classnames("", className)}
+			viewBox="0 0 34 27"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+		>
+			<g filter="url(#filter0_d_38_1195)">
+				<rect
+					x="4.5"
+					width="24.8829"
+					height="3.12244"
+					rx="1.56122"
+					fill="#2E2E2E"
+				/>
+				<rect
+					x="4.5"
+					y="7.49384"
+					width="19.3548"
+					height="3.12244"
+					rx="1.56122"
+					fill="#2E2E2E"
+				/>
+				<rect
+					x="4.5"
+					y="14.9877"
+					width="22.3097"
+					height="3.12244"
+					rx="1.56122"
+					fill="#2E2E2E"
+				/>
+			</g>
+			<defs>
+				<filter
+					id="filter0_d_38_1195"
+					x="0.5"
+					y="0"
+					width="33.8829"
+					height="26.1101"
+					filterUnits="userSpaceOnUse"
+					color-interpolation-filters="sRGB"
+				>
+					<feFlood flood-opacity="0" result="BackgroundImageFix" />
+					<feColorMatrix
+						in="SourceAlpha"
+						type="matrix"
+						values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+						result="hardAlpha"
+					/>
+					<feOffset dy="4" />
+					<feGaussianBlur stdDeviation="2" />
+					<feComposite in2="hardAlpha" operator="out" />
+					<feColorMatrix
+						type="matrix"
+						values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+					/>
+					<feBlend
+						mode="normal"
+						in2="BackgroundImageFix"
+						result="effect1_dropShadow_38_1195"
+					/>
+					<feBlend
+						mode="normal"
+						in="SourceGraphic"
+						in2="effect1_dropShadow_38_1195"
+						result="shape"
+					/>
+				</filter>
+			</defs>
+		</svg>
+	);
+};

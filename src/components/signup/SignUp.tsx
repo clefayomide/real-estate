@@ -3,7 +3,6 @@ import {
 	AppCheckbox,
 	AppFormContainer,
 	AppInput,
-	AppLink,
 	AppModal,
 	AppPasswordInput,
 } from "..";
@@ -130,12 +129,6 @@ const SignUp = () => {
 									<span className="absolute">{errors.checkbox?.message}</span>
 								</div>
 							)}
-						/>
-						<AppLink
-							color="primary"
-							href="#"
-							size="sm"
-							text="Forgot password?"
 						/>
 					</div>
 					<div className="flex justify-end mt-6">
