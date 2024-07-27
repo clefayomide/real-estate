@@ -1,6 +1,5 @@
 // Need to use the React-specific entry point to import createApi
 import apiBaseQuery from "../baseQuery/apiBaseQuery";
-import { IQUICKSEARCHSELECT } from "../constants";
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 // Define a service using a base URL and expected endpoints
@@ -8,7 +7,7 @@ export const searchApi = createApi({
 	reducerPath: "searchApi",
 	baseQuery: apiBaseQuery,
 	endpoints: (builder) => ({
-		getQuickSearch: builder.query<IQUICKSEARCHSELECT, void>({
+		getQuickSearch: builder.query<any, void>({
 			query: () => ({
 				url: "search/quick",
 				method: "GET",
