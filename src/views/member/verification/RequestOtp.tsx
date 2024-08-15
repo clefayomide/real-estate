@@ -12,9 +12,7 @@ const RequestOtp = () => {
 	const navigate = useNavigate();
 	const user = useAppSelector((state) => state.user);
 	const { user: userObject } = user;
-	const {
-		data: { id, email },
-	} = userObject;
+	const { data: { id = "", email = "" } = {} } = userObject;
 	const [verificationRequest, { isLoading }] = useVerificationRequestMutation();
 
 	const handleRequestOtp = () => {
@@ -24,7 +22,7 @@ const RequestOtp = () => {
 				const { message } = response;
 				if (message.toLowerCase() === "account already verified") {
 					notifySuccess(message, "Verified");
-					return navigate(path.home)
+					return navigate(path.home);
 				}
 				navigate(path.verifyOtp);
 			})

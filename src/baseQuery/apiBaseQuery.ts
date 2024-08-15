@@ -15,12 +15,12 @@ const baseQuery = fetchBaseQuery({
 	prepareHeaders: (headers, { getState }) => {
 		const {
 			user: {
-				// @ts-ignore
-				user: { data, isAuthenticated },
+				user: { data: { token = "", tokenType = "" } = {} },
 			},
 		} = getState() as RootState;
 		headers.set("Content-type", "application/json; charset=UTF-8");
 		headers.set("Access-Control-Allow-Origin", "*");
+		headers.set("Authorization", `${tokenType} ${token}`);
 		return headers;
 	},
 	credentials: "include",
@@ -50,7 +50,7 @@ const apiBaseQuery: BaseQueryFn<
 	if (
 		result.error &&
 		Number(result?.error.status) === 401 &&
-		error.message === "user not authenticated"
+		error.message === "Unauthorized"
 	) {
 		api.dispatch(reAuthUser());
 	}
