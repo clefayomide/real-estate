@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { IUSER } from "../../types";
 
 const initialState: IUSER = {
@@ -40,10 +40,13 @@ export const userSlice = createSlice({
 			};
 		},
 		updateVerification: (state, action) => {
-			const { verified } = action.payload ?? {};
+			const currentState = current(state.data);
 			return {
 				...state,
-				data: { ...state.data, verified },
+				data: {
+					...currentState,
+					verified: action.payload,
+				},
 			};
 		},
 		reAuthUser: () => {

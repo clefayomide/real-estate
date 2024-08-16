@@ -21,21 +21,24 @@ import { propogateError } from "../../../utils/error/propogation";
 import { ErrorPropogationType, SuccessType } from "../../../types";
 import { successNotificationTitles } from "../../../constants";
 import { updateVerification } from "../../../lib/feature/user";
+import { useNavigate } from "react-router-dom";
+import { path } from "../../../routes/path";
 
 const VerifyOtp = () => {
 	const user = useAppSelector((state) => state.user.user);
-	const { data: { id = null, verified = null } = {} } = user ?? {};
+	const { data: { id = null, verified = null, email = "" } = {} } = user ?? {};
 	const [successful, setSuccessful] = useState(Boolean(verified));
 	const [canResend, setCanResend] = useState(false);
 	const [verificationRequest, { isLoading: isResendingOtp }] =
 		useVerificationRequestMutation();
 	const [verifyOtp, { isLoading: isVerifyingOtp }] = useVerifyOtpMutation();
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 
 	const handleOnTimedOut = () => setCanResend(true);
 
 	const handleResend = (reset: () => void) => {
-		verificationRequest({ id })
+		verificationRequest({ id, email })
 			.unwrap()
 			.then(() => {
 				notifySuccess(
@@ -66,9 +69,11 @@ const VerifyOtp = () => {
 			.unwrap()
 			.then((response: SuccessType) => {
 				const { message = "", data: { verified = null } = {} } = response ?? {};
-				notifySuccess(message, successNotificationTitles.verification);
+
 				dispatch(updateVerification(verified));
+				notifySuccess(message, successNotificationTitles.verification);
 				setSuccessful(verified);
+				navigate(path.home);
 			})
 			.catch((error: ErrorPropogationType) => {
 				propogateError(error);
@@ -84,7 +89,7 @@ const VerifyOtp = () => {
 				<AppParagraph className="w-full text-lg md:text-xl md:w-[492px] mt-[6px] md:mt-1 leading-[25px]">
 					Kindly enter the otp sent to your registered email address{" "}
 					<span className="font-semibold text-black text-base md:text-lg">
-						(victorayomide32@gmail.com)
+						({email})
 					</span>
 					.{" "}
 					<span>
