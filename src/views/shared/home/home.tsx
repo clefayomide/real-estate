@@ -29,6 +29,7 @@ import {
 	useGetQuickSearchQuery,
 	useQuickSearchMutation,
 } from "../../../services/search";
+import { useAppSelector } from "../../../lib/hooks";
 
 interface IFormInput {
 	location: string;
@@ -37,6 +38,9 @@ interface IFormInput {
 }
 
 export default function Home() {
+	const user = useAppSelector((state) => state.user);
+	const { user: userData } = user ?? {};
+	const { isAuthenticated } = userData ?? {};
 	const { data } = useGetQuickSearchQuery();
 	const [quickSearch, { isLoading }] = useQuickSearchMutation();
 
@@ -458,84 +462,90 @@ export default function Home() {
 				</div>
 			</section>
 
-			<section className="mt-14">
-				<AppHeading
-					type={6}
-					className="text-titleMobile md:text-titleIpadAndDesktop leading-[34px] md:leading-[64px]"
-				>
-					Giving you peace of mind
-				</AppHeading>
-				<div className="mt-10 flex flex-col flex-wrap md:flex-row gap-5 lg:gap-4 ">
-					<AppCard className="shadow-none w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-fit lg:h-[298px]">
-						<LoveIcon fill="#2f80ed" />
-						<AppHeading type={6} className="text-[20px] leading-[64px]">
-							Comfortable
-						</AppHeading>
-						<AppParagraph className="text-[16px]">
-							Enjoy lifestyle amenities designed to provide every homeowners
-							modern comfort, a stone's throw away from schools, churches, and
-							hospitals.
-						</AppParagraph>
-					</AppCard>
-					<AppCard className="b shadow-none w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-fit lg:h-[298px]">
-						<SecurityIcon fill="#2f80ed" />
-						<AppHeading type={6} className="text-[20px] leading-[64px]">
-							Extra security
-						</AppHeading>
-						<AppParagraph className="text-[16px]">
-							You can communicate with possible tenants without disclosing your
-							phone number. To verify their legitimacy, we also demand that all
-							users register.
-						</AppParagraph>
-					</AppCard>
-					<AppCard className="b shadow-none w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-fit lg:h-[298px]">
-						<StarIcon fill="#2f80ed" />
-						<AppHeading type={6} className="text-[20px] leading-[64px]">
-							Luxury
-						</AppHeading>
-						<AppParagraph className="text-[16px]">
-							Find out how we provide the highest standard of professional
-							property management to give you all the benefits of property.
-						</AppParagraph>
-					</AppCard>
-					<AppCard className="b shadow-none w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-fit lg:h-[298px]">
-						<BestPriceIcon fill="#2f80ed" />
-						<AppHeading type={6} className="text-[20px] leading-[64px]">
-							Best Price
-						</AppHeading>
-						<AppParagraph className="text-[16px]">
-							Not sure what you should be charging for your property? Let us do
-							the numbers for you—contact us today for a free rental appraisal
-							on your home.
-						</AppParagraph>
-					</AppCard>
-					<AppCard className="b shadow-none w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-fit lg:h-[298px]">
-						<LocationIcon fill="#2f80ed" />
-						<AppHeading type={6} className="text-[20px] leading-[64px]">
-							Strategic Location
-						</AppHeading>
-						<AppParagraph className="text-[16px]">
-							Located in the city center close to the shopping center. Very good
-							for areas surrounded by international education centers, start-up
-							office centers.
-						</AppParagraph>
-					</AppCard>
-					<AppCard className="b shadow-none w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-fit lg:h-[298px]">
-						<PieIcon fill="#2f80ed" />
-						<AppHeading type={6} className="text-[20px] leading-[64px]">
-							Efficient
-						</AppHeading>
-						<AppParagraph className="text-[16px]">
-							Schedule visits to multiple properties at once in one day without
-							having to call them one by one. Check everything and find the best
-							properties for rent.
-						</AppParagraph>
-					</AppCard>
-				</div>
-				<div className="flex flex-col md:flex-row mt-8 md:mt-0 gap-8 md:gap-0 md:justify-between "></div>
-			</section>
+			{!isAuthenticated && (
+				<section className="mt-14">
+					<AppHeading
+						type={6}
+						className="text-titleMobile md:text-titleIpadAndDesktop leading-[34px] md:leading-[64px]"
+					>
+						Giving you peace of mind
+					</AppHeading>
+					<div className="mt-10 flex flex-col flex-wrap md:flex-row gap-5 lg:gap-4 ">
+						<AppCard className="shadow-none w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-fit lg:h-[298px]">
+							<LoveIcon fill="#2f80ed" />
+							<AppHeading type={6} className="text-[20px] leading-[64px]">
+								Comfortable
+							</AppHeading>
+							<AppParagraph className="text-[16px]">
+								Enjoy lifestyle amenities designed to provide every homeowners
+								modern comfort, a stone's throw away from schools, churches, and
+								hospitals.
+							</AppParagraph>
+						</AppCard>
+						<AppCard className="b shadow-none w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-fit lg:h-[298px]">
+							<SecurityIcon fill="#2f80ed" />
+							<AppHeading type={6} className="text-[20px] leading-[64px]">
+								Extra security
+							</AppHeading>
+							<AppParagraph className="text-[16px]">
+								You can communicate with possible tenants without disclosing
+								your phone number. To verify their legitimacy, we also demand
+								that all users register.
+							</AppParagraph>
+						</AppCard>
+						<AppCard className="b shadow-none w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-fit lg:h-[298px]">
+							<StarIcon fill="#2f80ed" />
+							<AppHeading type={6} className="text-[20px] leading-[64px]">
+								Luxury
+							</AppHeading>
+							<AppParagraph className="text-[16px]">
+								Find out how we provide the highest standard of professional
+								property management to give you all the benefits of property.
+							</AppParagraph>
+						</AppCard>
+						<AppCard className="b shadow-none w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-fit lg:h-[298px]">
+							<BestPriceIcon fill="#2f80ed" />
+							<AppHeading type={6} className="text-[20px] leading-[64px]">
+								Best Price
+							</AppHeading>
+							<AppParagraph className="text-[16px]">
+								Not sure what you should be charging for your property? Let us
+								do the numbers for you—contact us today for a free rental
+								appraisal on your home.
+							</AppParagraph>
+						</AppCard>
+						<AppCard className="b shadow-none w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-fit lg:h-[298px]">
+							<LocationIcon fill="#2f80ed" />
+							<AppHeading type={6} className="text-[20px] leading-[64px]">
+								Strategic Location
+							</AppHeading>
+							<AppParagraph className="text-[16px]">
+								Located in the city center close to the shopping center. Very
+								good for areas surrounded by international education centers,
+								start-up office centers.
+							</AppParagraph>
+						</AppCard>
+						<AppCard className="b shadow-none w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-fit lg:h-[298px]">
+							<PieIcon fill="#2f80ed" />
+							<AppHeading type={6} className="text-[20px] leading-[64px]">
+								Efficient
+							</AppHeading>
+							<AppParagraph className="text-[16px]">
+								Schedule visits to multiple properties at once in one day
+								without having to call them one by one. Check everything and
+								find the best properties for rent.
+							</AppParagraph>
+						</AppCard>
+					</div>
+					<div className="flex flex-col md:flex-row mt-8 md:mt-0 gap-8 md:gap-0 md:justify-between "></div>
+				</section>
+			)}
 
-			<section className="mt-32 lg:mt-14 flex flex-col md:flex-row justify-between gap-8 lg:gap-14 items-center">
+			<section
+				className={`${
+					isAuthenticated ? "lg:mt-32" : "lg:mt-14"
+				} mt-32  flex flex-col md:flex-row justify-between gap-8 lg:gap-14 items-center`}
+			>
 				<div className="w-full md:w-1/2 flex justify-end h-[475px] bg-[url('https://res.cloudinary.com/clefayomide/image/upload/v1716720043/g37ch4yvalypybj3unyd.svg')]">
 					<div className="w-[85%] relative h-full flex flex-col justify-between ">
 						<AppStarRating className="-mt-24 h-[250px]" />
@@ -564,103 +574,105 @@ export default function Home() {
 				</div>
 			</section>
 
-			<section className="mt-14">
-				<AppHeading
-					type={6}
-					className="text-titleMobile md:text-titleIpadAndDesktop leading-[34px] md:leading-[64px]"
-				>
-					What people say about us
-				</AppHeading>
+			{!isAuthenticated && (
+				<section className="mt-14">
+					<AppHeading
+						type={6}
+						className="text-titleMobile md:text-titleIpadAndDesktop leading-[34px] md:leading-[64px]"
+					>
+						What people say about us
+					</AppHeading>
 
-				<div className="mt-10 flex flex-col md:flex-row gap-5 md:gap-4 flex-wrap ">
-					<AppCard className="w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-auto lg:h-fit rounded-none p-5 group hover:bg-btn_blue hover:!text-white">
-						<div className="flex flex-col gap-5">
-							<QuoteIcon />
-							<AppHeading
-								type={6}
-								className="w-full md:w-[265px] text-[18px] font-semibold"
-							>
-								It proved to be exactly the kind of home we wanted.
-							</AppHeading>
-							<AppParagraph className="group-hover:text-white">
-								We wish to express our thanks for your hard work in finding us a
-								temporary home, which proved to be exactly what we wanted.
-							</AppParagraph>
+					<div className="mt-10 flex flex-col md:flex-row gap-5 md:gap-4 flex-wrap ">
+						<AppCard className="w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-auto lg:h-fit rounded-none p-5 group hover:bg-btn_blue hover:!text-white">
+							<div className="flex flex-col gap-5">
+								<QuoteIcon />
+								<AppHeading
+									type={6}
+									className="w-full md:w-[265px] text-[18px] font-semibold"
+								>
+									It proved to be exactly the kind of home we wanted.
+								</AppHeading>
+								<AppParagraph className="group-hover:text-white">
+									We wish to express our thanks for your hard work in finding us
+									a temporary home, which proved to be exactly what we wanted.
+								</AppParagraph>
 
-							<AppUser
-								className="self-start group-hover:!text-white"
-								name="Alex Hunter"
-								description={
-									<div className="group-hover:!text-white">
-										Karsana Properties
-									</div>
-								}
-								avatarProps={{
-									src: "https://res.cloudinary.com/clefayomide/image/upload/v1662292169/cld-sample.jpg",
-								}}
-							/>
-						</div>
-					</AppCard>
-					<AppCard className="w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-auto lg:h-fit rounded-none p-5 group hover:bg-btn_blue hover:!text-white">
-						<div className="flex flex-col gap-5">
-							<QuoteIcon />
-							<AppHeading
-								type={6}
-								className="w-full md:w-[265px] text-[18px] font-semibold"
-							>
-								Nobody knows Abuja better than David.
-							</AppHeading>
-							<AppParagraph className="group-hover:text-white">
-								My wife and I had a dream of downsizing from our house in Cape
-								Elizabeth into a small condo closer to where we work and play in
-								Portland.
-							</AppParagraph>
+								<AppUser
+									className="self-start group-hover:!text-white"
+									name="Alex Hunter"
+									description={
+										<div className="group-hover:!text-white">
+											Karsana Properties
+										</div>
+									}
+									avatarProps={{
+										src: "https://res.cloudinary.com/clefayomide/image/upload/v1662292169/cld-sample.jpg",
+									}}
+								/>
+							</div>
+						</AppCard>
+						<AppCard className="w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-auto lg:h-fit rounded-none p-5 group hover:bg-btn_blue hover:!text-white">
+							<div className="flex flex-col gap-5">
+								<QuoteIcon />
+								<AppHeading
+									type={6}
+									className="w-full md:w-[265px] text-[18px] font-semibold"
+								>
+									Nobody knows Abuja better than David.
+								</AppHeading>
+								<AppParagraph className="group-hover:text-white">
+									My wife and I had a dream of downsizing from our house in Cape
+									Elizabeth into a small condo closer to where we work and play
+									in Portland.
+								</AppParagraph>
 
-							<AppUser
-								className="self-start group-hover:!text-white"
-								name="Alex Hunter"
-								description={
-									<div className="group-hover:!text-white">
-										Karsana Properties
-									</div>
-								}
-								avatarProps={{
-									src: "https://res.cloudinary.com/clefayomide/image/upload/v1662292169/cld-sample.jpg",
-								}}
-							/>
-						</div>
-					</AppCard>
-					<AppCard className="w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-auto lg:h-fit rounded-none p-5 group hover:bg-btn_blue hover:!text-white">
-						<div className="flex flex-col gap-5">
-							<QuoteIcon />
-							<AppHeading
-								type={6}
-								className="w-full md:w-[265px] text-[18px] font-semibold"
-							>
-								He keeps his client’s best interests in sharp focus
-							</AppHeading>
-							<AppParagraph className="group-hover:text-white">
-								David is the last realtor I'll ever need, I'm confident after
-								working with him to sell my house in 2013. I've since sold one
-								property and purchased two.
-							</AppParagraph>
+								<AppUser
+									className="self-start group-hover:!text-white"
+									name="Alex Hunter"
+									description={
+										<div className="group-hover:!text-white">
+											Karsana Properties
+										</div>
+									}
+									avatarProps={{
+										src: "https://res.cloudinary.com/clefayomide/image/upload/v1662292169/cld-sample.jpg",
+									}}
+								/>
+							</div>
+						</AppCard>
+						<AppCard className="w-full md:w-[48%] lg:w-[295px] xl:w-[32%] h-auto lg:h-fit rounded-none p-5 group hover:bg-btn_blue hover:!text-white">
+							<div className="flex flex-col gap-5">
+								<QuoteIcon />
+								<AppHeading
+									type={6}
+									className="w-full md:w-[265px] text-[18px] font-semibold"
+								>
+									He keeps his client’s best interests in sharp focus
+								</AppHeading>
+								<AppParagraph className="group-hover:text-white">
+									David is the last realtor I'll ever need, I'm confident after
+									working with him to sell my house in 2013. I've since sold one
+									property and purchased two.
+								</AppParagraph>
 
-							<AppUser
-								className="self-start group-hover:!text-white"
-								name="Alex Hunter"
-								description={
-									<div className="group-hover:!text-white">
-										Karsana Properties
-									</div>
-								}
-								avatarProps={{
-									src: "https://res.cloudinary.com/clefayomide/image/upload/v1662292169/cld-sample.jpg",
-								}}
-							/>
-						</div>
-					</AppCard>
-				</div>
-			</section>
+								<AppUser
+									className="self-start group-hover:!text-white"
+									name="Alex Hunter"
+									description={
+										<div className="group-hover:!text-white">
+											Karsana Properties
+										</div>
+									}
+									avatarProps={{
+										src: "https://res.cloudinary.com/clefayomide/image/upload/v1662292169/cld-sample.jpg",
+									}}
+								/>
+							</div>
+						</AppCard>
+					</div>
+				</section>
+			)}
 		</React.Fragment>
 	);
 }
