@@ -1,21 +1,18 @@
-"use client";
-import React from "react";
+import React, { Key, useState } from "react";
 import { Tab, Tabs } from "@nextui-org/react";
 import {
 	AppButton,
 	AppCard,
-	AppFormContainer,
 	AppHeading,
 	AppImage,
 	AppParagraph,
+	AppQuickSearchForm,
 	AppSalesRating,
-	AppSelect,
 	AppStarRating,
 	AppUser,
 } from "../../../components";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { quickSearch as quickSearchSchema } from "../../../schema/quickSearch";
+import { SubmitHandler } from "react-hook-form";
+
 import {
 	LoveIcon,
 	StarIcon,
@@ -25,10 +22,7 @@ import {
 	PieIcon,
 	QuoteIcon,
 } from "../../../assets";
-import {
-	useGetQuickSearchQuery,
-	useQuickSearchMutation,
-} from "../../../services/search";
+import { useQuickSearchMutation } from "../../../services/search";
 import { useAppSelector } from "../../../lib/hooks";
 
 interface IFormInput {
@@ -39,303 +33,67 @@ interface IFormInput {
 
 export default function Home() {
 	const user = useAppSelector((state) => state.user);
+	const [currentTab, setCurrentTab] = useState("buy");
 	const { user: userData } = user ?? {};
 	const { isAuthenticated } = userData ?? {};
-	const { data } = useGetQuickSearchQuery();
 	const [quickSearch, { isLoading }] = useQuickSearchMutation();
 
-	const selectData = data ?? { location: [], type: [], range: [] };
-	const location = selectData.location;
-	const type = selectData.type;
-	const range = selectData.range;
-
-	const {
-		control,
-		reset,
-		handleSubmit,
-		formState: { errors },
-	} = useForm({
-		resolver: yupResolver(quickSearchSchema),
-		defaultValues: {
-			location: "",
-			type: "",
-			range: "",
-		},
-	});
-
 	const onSubmit: SubmitHandler<IFormInput> = (data) => {
-		quickSearch(data)
+		const reqData = { ...data, searchType: currentTab };
+		quickSearch(reqData)
 			.unwrap()
-			.then((response: any) => {
+			.then((response) => {
 				console.log(response);
 			})
-			.catch((error: any) => {
+			.catch((error) => {
 				console.log(error);
 			});
 	};
 
-	const handleSelectionChange = () => {
-		reset();
+	const handleSelectionChange = (key: Key) => {
+		setCurrentTab(key.toString());
 	};
-
-	const hasError =
-		errors.type?.message ?? errors.range?.message ?? errors.location?.message;
 
 	return (
 		<React.Fragment>
-			<section>
-				<div className="flex justify-between items-center">
-					<section className="bg-light_purple xl:bg-[#ffffff] rounded-md p-5 w-full xl:w-1/2 lg:pl-[100px]">
-						<AppHeading
-							type={1}
-							className="w-full lg:w-[750px] text-[28px] md:text-[54px] leading-[34px] md:leading-[60px]"
-						>
-							Your dream home is just one search away
-						</AppHeading>
-						<AppParagraph className="w-full text-xl mt-5 lg:w-[502px] h-[48px] ">
-							Explore our range of beautiful properties with the addition of
-							separate accommodation suitable for you.
-						</AppParagraph>
+			<section className="flex justify-between items-center">
+				<section className="bg-light_purple xl:bg-[#ffffff] rounded-md p-7 w-full xl:w-1/2 lg:pl-[100px]">
+					<AppHeading
+						type={1}
+						className="w-full lg:w-[750px] text-[28px] md:text-[54px] leading-[34px] md:leading-[60px]"
+					>
+						Your dream home is just one search away
+					</AppHeading>
+					<AppParagraph className="w-full text-xl mt-5 lg:w-[502px] h-[48px] ">
+						Explore our range of beautiful properties with the addition of
+						separate accommodation suitable for you.
+					</AppParagraph>
 
-						<Tabs
-							aria-label="Options"
-							color="primary"
-							className="mt-20 md:mt-5"
-							onSelectionChange={handleSelectionChange}
-						>
-							<Tab className="w-full" key="buy" title="Buy">
-								<AppCard
-									className={`w-full p-3 md:p-0 md:w-fit animate-appearance-in ease-linear ${
-										hasError && "h-fit md:h-[100px]"
-									}`}
-								>
-									<AppFormContainer
-										className="w-full"
-										onSubmit={handleSubmit(onSubmit)}
-									>
-										<div className="flex gap-5 flex-wrap md:flex-nowrap">
-											<Controller
-												name="location"
-												control={control}
-												render={({ field }) => (
-													<div className="w-full md:w-fit flex flex-col relative">
-														<AppSelect
-															{...field}
-															errorMessage={errors.location?.message as string}
-															isRequired
-															label="Location"
-															selectItems={location}
-															className="md:w-[140px] !h-[48px] inline-block"
-														/>
-													</div>
-												)}
-											/>
-
-											<Controller
-												name="type"
-												control={control}
-												render={({ field }) => (
-													<div className="w-full md:w-fit mt-2 md:mt-0 flex flex-col relative">
-														<AppSelect
-															{...field}
-															errorMessage={errors.type?.message as string}
-															isRequired
-															label="Type"
-															selectItems={type}
-															className="md:w-[140px] !h-[48px] inline-block"
-														/>
-													</div>
-												)}
-											/>
-
-											<Controller
-												name="range"
-												control={control}
-												render={({ field }) => (
-													<div className="w-full md:w-fit mt-2 md:mt-0 flex flex-col relative">
-														<AppSelect
-															{...field}
-															errorMessage={errors.range?.message as string}
-															isRequired
-															label="Range"
-															selectItems={range}
-															className="md:w-[140px] !h-[40px] inline-block"
-														/>
-													</div>
-												)}
-											/>
-
-											<AppButton
-												disabled={isLoading}
-												loading={isLoading}
-												type="submit"
-												className={`w-full md:w-[130px] mt-4 md:mt-0 h-[48px] rounded-md text-white text-sm bg-btn_blue`}
-											>
-												Search
-											</AppButton>
-										</div>
-									</AppFormContainer>
-								</AppCard>
-							</Tab>
-							<Tab key="rent" title="Rent">
-								<AppCard
-									className={`w-full p-3 md:p-0 md:w-fit animate-appearance-in ease-linear ${
-										hasError && "h-fit md:h-[100px]"
-									}`}
-								>
-									<AppFormContainer
-										className="w-full"
-										onSubmit={handleSubmit(onSubmit)}
-									>
-										<div className="flex gap-5 flex-wrap md:flex-nowrap">
-											<Controller
-												name="location"
-												control={control}
-												render={({ field }) => (
-													<div className="w-full md:w-fit flex flex-col relative">
-														<AppSelect
-															{...field}
-															isRequired
-															errorMessage={errors.location?.message as string}
-															label="Location"
-															selectItems={location}
-															className="md:w-[140px] !h-[48px] inline-block"
-														/>
-													</div>
-												)}
-											/>
-
-											<Controller
-												name="type"
-												control={control}
-												render={({ field }) => (
-													<div className="w-full md:w-fit mt-2 md:mt-0 flex flex-col relative">
-														<AppSelect
-															{...field}
-															isRequired
-															errorMessage={errors.type?.message as string}
-															label="Type"
-															selectItems={type}
-															className="md:w-[140px] !h-[48px] inline-block"
-														/>
-													</div>
-												)}
-											/>
-
-											<Controller
-												name="range"
-												control={control}
-												render={({ field }) => (
-													<div className="w-full md:w-fit mt-2 md:mt-0 flex flex-col relative">
-														<AppSelect
-															{...field}
-															errorMessage={errors.range?.message as string}
-															isRequired
-															label="Range"
-															selectItems={range}
-															className="md:w-[140px] !h-[40px] inline-block"
-														/>
-													</div>
-												)}
-											/>
-
-											<AppButton
-												type="submit"
-												loading={isLoading}
-												disabled={isLoading}
-												className={`w-full md:w-[130px] mt-4 md:mt-0 h-[48px] rounded-md text-white text-sm bg-btn_blue`}
-											>
-												Search
-											</AppButton>
-										</div>
-									</AppFormContainer>
-								</AppCard>
-							</Tab>
-							<Tab key="sell" title="Sell">
-								<AppCard
-									className={`w-full p-3 md:p-0 md:w-fit animate-appearance-in ease-linear ${
-										hasError && "h-fit md:h-[100px]"
-									}`}
-								>
-									<AppFormContainer
-										className="w-full"
-										onSubmit={handleSubmit(onSubmit)}
-									>
-										<div className="flex gap-5 flex-wrap md:flex-nowrap">
-											<Controller
-												name="location"
-												control={control}
-												render={({ field }) => (
-													<div className="w-full md:w-fit flex flex-col relative">
-														<AppSelect
-															{...field}
-															isRequired
-															errorMessage={errors.location?.message as string}
-															label="Location"
-															selectItems={location}
-															className="md:w-[140px] !h-[48px] inline-block"
-														/>
-													</div>
-												)}
-											/>
-
-											<Controller
-												name="type"
-												control={control}
-												render={({ field }) => (
-													<div className="w-full md:w-fit mt-2 md:mt-0 flex flex-col relative">
-														<AppSelect
-															{...field}
-															isRequired
-															errorMessage={errors.type?.message as string}
-															label="Type"
-															selectItems={type}
-															className="md:w-[140px] !h-[48px] inline-block"
-														/>
-													</div>
-												)}
-											/>
-
-											<Controller
-												name="range"
-												control={control}
-												render={({ field }) => (
-													<div className="w-full md:w-fit mt-2 md:mt-0 flex flex-col relative">
-														<AppSelect
-															{...field}
-															errorMessage={errors.range?.message as string}
-															isRequired
-															label="Range"
-															selectItems={range}
-															className="md:w-[140px] !h-[40px] inline-block"
-														/>
-													</div>
-												)}
-											/>
-
-											<AppButton
-												type="submit"
-												loading={isLoading}
-												disabled={isLoading}
-												className={`w-full md:w-[130px] mt-4 md:mt-0 h-[48px] rounded-md text-white text-sm bg-btn_blue`}
-											>
-												Search
-											</AppButton>
-										</div>
-									</AppFormContainer>
-								</AppCard>
-							</Tab>
-						</Tabs>
-					</section>
-					<section className="hidden w-1/2 xl:flex justify-end -mr-5">
-						<AppImage
-							src={
-								"https://res.cloudinary.com/clefayomide/image/upload/v1716719938/scgs4vymwazab2ruxiur.png"
-							}
-							alt="building"
-						/>
-					</section>
-				</div>
+					<Tabs
+						aria-label="Options"
+						color="primary"
+						className="mt-20 md:mt-5"
+						onSelectionChange={handleSelectionChange}
+					>
+						<Tab className="w-full" key="buy" title="Buy">
+							<AppQuickSearchForm isLoading={isLoading} onSubmit={onSubmit} />
+						</Tab>
+						<Tab key="rent" title="Rent">
+							<AppQuickSearchForm isLoading={isLoading} onSubmit={onSubmit} />
+						</Tab>
+						<Tab key="sell" title="Sell">
+							<AppQuickSearchForm isLoading={isLoading} onSubmit={onSubmit} />
+						</Tab>
+					</Tabs>
+				</section>
+				<section className="hidden w-1/2 xl:flex justify-end -mr-5">
+					<AppImage
+						src={
+							"https://res.cloudinary.com/clefayomide/image/upload/v1716719938/scgs4vymwazab2ruxiur.png"
+						}
+						alt="building"
+					/>
+				</section>
 			</section>
 			<section className="mt-14">
 				<AppHeading

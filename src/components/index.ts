@@ -11,7 +11,6 @@ export {
 	SalesRating as AppSalesRating,
 } from "./ratings";
 export { default as AppUser } from "./user/User";
-// @ts-ignore
 export { default as AppLoader } from "./loader/Loader";
 export { default as AppModal } from "./modal/modal";
 export { default as AppInput } from "./form/Input";
@@ -22,3 +21,4 @@ export { default as AppPasswordInput } from "./form/PasswordInput";
 export { default as AppImage } from "./image/Image";
 export { default as AppVerificationBanner } from "./banner/verify";
 export { default as AppOtpTimer } from "./otp-timer/otp-timer";
+export { default as AppQuickSearchForm } from "./form/QuickSearch";

@@ -3,6 +3,7 @@ import {
 	SelectItem as NextSelectItem,
 } from "@nextui-org/react";
 import { classnames } from "../../utils/classnames";
+import { forwardRef } from "react";
 
 type selectItems = {
 	value: string;
@@ -16,10 +17,10 @@ interface ISelect {
 	label: string;
 	selectItems: Array<selectItems>;
 	errorMessage: string;
-	[key: string]: any;
+	[key: string]: unknown;
 }
 
-export const Select = (props: ISelect) => {
+export const Select = forwardRef<HTMLSelectElement, ISelect>((props, ref) => {
 	const {
 		className = "",
 		size = "sm",
@@ -30,6 +31,7 @@ export const Select = (props: ISelect) => {
 	return (
 		<NextSelect
 			{...rest}
+			ref={ref}
 			isInvalid={Boolean(errorMessage)}
 			errorMessage={errorMessage}
 			items={selectItems}
@@ -43,4 +45,4 @@ export const Select = (props: ISelect) => {
 			)}
 		</NextSelect>
 	);
-};
+});

@@ -12,7 +12,8 @@ const RequestOtp = () => {
 	const navigate = useNavigate();
 	const user = useAppSelector((state) => state.user);
 	const { user: userObject } = user;
-	const { data: { id = "", email = "" } = {} } = userObject;
+	const { data } = userObject;
+	const { id = "", email = "" } = data ?? {};
 	const [verificationRequest, { isLoading }] = useVerificationRequestMutation();
 
 	const handleRequestOtp = () => {

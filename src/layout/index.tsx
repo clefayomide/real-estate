@@ -10,7 +10,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div className="font-montserrat relative">
 			<AppHeader />
-			{user?.isAuthenticated && !user.data.verified && (
+			{user?.isAuthenticated && !user.data?.verified && (
 				<AppVerificationBanner
 					className="fixed px-2 md:px-10 z-50 !text-[10px] md:!text-sm "
 					message={

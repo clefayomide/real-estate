@@ -18,7 +18,7 @@ import {
 } from "../../../services/auth";
 import { notifySuccess } from "../../../utils/notification";
 import { propogateError } from "../../../utils/error/propogation";
-import { ErrorPropogationType, SuccessType } from "../../../types";
+import { ErrorPropogationType } from "../../../types";
 import { successNotificationTitles } from "../../../constants";
 import { updateVerification } from "../../../lib/feature/user";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +26,8 @@ import { path } from "../../../routes/path";
 
 const VerifyOtp = () => {
 	const user = useAppSelector((state) => state.user.user);
-	const { data: { id = null, verified = null, email = "" } = {} } = user ?? {};
+	const { data } = user;
+	const { id, verified, email = "" } = data ?? {};
 	const [successful, setSuccessful] = useState(Boolean(verified));
 	const [canResend, setCanResend] = useState(false);
 	const [verificationRequest, { isLoading: isResendingOtp }] =
@@ -67,7 +68,7 @@ const VerifyOtp = () => {
 	const onSubmit: SubmitHandler<{ otp: string }> = (data) => {
 		verifyOtp({ ...data, id })
 			.unwrap()
-			.then((response: SuccessType) => {
+			.then((response) => {
 				const { message = "", data: { verified = null } = {} } = response ?? {};
 
 				dispatch(updateVerification(verified));
