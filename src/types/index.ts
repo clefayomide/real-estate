@@ -5,15 +5,29 @@ interface RequestResponseI {
 }
 
 export interface ErrorType extends RequestResponseI {
-	error?: String[];
+	error?: string[];
 }
 
 export interface SuccessType extends RequestResponseI {
-	data?: any;
+	data?: Record<string, unknown>;
 }
 
 export interface IUSER {
-	[key: string]: any;
+	data: {
+		id: number;
+		verified: boolean;
+		createdAt: string;
+		updatedAt: string;
+		username: string;
+		email: string;
+		token: string;
+		expires: string;
+		tokenType: string;
+	} | null;
+	isAuthenticated: boolean;
+	showLoginForm: boolean;
+	showSignupForm: boolean;
+	scroll: number;
 }
 
 export type OtpTimerType = {
@@ -30,21 +44,19 @@ export type ErrorPropogationType = {
 	data: ErrorType;
 };
 
-// export type SuccessPropogationType = {
-// 	data: SuccessType;
-// };
-
-export type userDetails = {
-	[key: string]: any;
-};
-
-type IQUICKSEARCHSELECTITEM = {
+type quickSearchSelectItemProps = {
 	value: string;
 	label: string;
 	description: string;
 };
-export type IQUICKSEARCHSELECT = {
-	location: Array<IQUICKSEARCHSELECTITEM>;
-	type: Array<IQUICKSEARCHSELECTITEM>;
-	range: Array<IQUICKSEARCHSELECTITEM>;
+export type quickSearchSelectProps = {
+	location: Array<quickSearchSelectItemProps>;
+	type: Array<quickSearchSelectItemProps>;
+	range: Array<quickSearchSelectItemProps>;
+};
+
+export type quickSearchFieldType = {
+	location: string;
+	type: string;
+	range: string;
 };

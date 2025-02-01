@@ -32,13 +32,13 @@ const Header = () => {
 	return (
 		<>
 			<header
-				className={`fixed top-0 z-50 w-full ${
+				className={`fixed shadow-md top-0 z-50 w-full ${
 					user.user?.scroll > 700
 						? "bg-light_purple "
 						: "bg-white mt-0 rounded-none"
 				}   h-[70px]`}
 			>
-				<nav className="flex h-full items-center w-full justify-between px-5 py-5 md:px-10">
+				<nav className="flex h-full items-center w-full justify-between px-5 py-6 md:px-10">
 					<AppImage
 						src={
 							"https://res.cloudinary.com/clefayomide/image/upload/v1717183114/eq4lrlw028ayysuogjg0.png"

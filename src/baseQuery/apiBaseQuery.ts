@@ -13,11 +13,9 @@ import { appConfig } from "../config";
 const baseQuery = fetchBaseQuery({
 	baseUrl: appConfig.baseUrl,
 	prepareHeaders: (headers, { getState }) => {
-		const {
-			user: {
-				user: { data: { token = "", tokenType = "" } = {} },
-			},
-		} = getState() as RootState;
+		const user = getState() as RootState;
+		const data = user.user.user.data;
+		const { token = "", tokenType = "" } = data ?? {};
 		headers.set("Content-type", "application/json; charset=UTF-8");
 		headers.set("Access-Control-Allow-Origin", "*");
 		headers.set("Authorization", `${tokenType} ${token}`);

@@ -2,7 +2,7 @@ import { createSlice, current } from "@reduxjs/toolkit";
 import { IUSER } from "../../types";
 
 const initialState: IUSER = {
-	data: {},
+	data: null,
 	isAuthenticated: false,
 	showLoginForm: false,
 	showSignupForm: false,
@@ -13,8 +13,9 @@ export const userSlice = createSlice({
 	name: "user",
 	initialState,
 	reducers: {
-		login: (_, action) => {
+		login: (state, action) => {
 			return {
+				...state,
 				data: action.payload,
 				isAuthenticated: true,
 			};
@@ -46,7 +47,7 @@ export const userSlice = createSlice({
 				data: {
 					...currentState,
 					verified: action.payload,
-				},
+				} as IUSER["data"],
 			};
 		},
 		reAuthUser: () => {
